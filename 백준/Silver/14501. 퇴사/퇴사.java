@@ -5,7 +5,8 @@ public class Main {
 	static int N;
 	static int[] T;
 	static int[] P;
-	static int[] dp;
+	static boolean[] visit;
+	static int max = Integer.MIN_VALUE;
 
 	public static void main(String[] args) {
 		
@@ -14,7 +15,7 @@ public class Main {
 		
 		T = new int[N];
 		P = new int[N];
-		dp = new int[N+1];
+		visit = new boolean[N];
 		
 		for(int i=0; i<N; i++)
 		{
@@ -22,28 +23,39 @@ public class Main {
 			P[i] = sc.nextInt();
 		}
 		
-		dp();
-		System.out.println(dp[0]);
+		iter(0);
+		System.out.println(max);
 		
 		
 		sc.close();
 	}
 
-	static void dp()
+	static void iter(int idx)
 	{
-		int Next;
-		
-		for(int i=N-1; i>=0; i--)
+		if(idx >= N)
 		{
-			Next = i+T[i];
-			
-			if(Next > N)
-				dp[i] = dp[i+1];
-			
-			else
-				dp[i] = Math.max(dp[i+1], P[i]+dp[Next]);
+			calc();
+			return;
 		}
 		
+		for(int i=idx; i<N; i++)
+		{
+			if(i+T[i] <= N)
+				visit[i] = true;
+			iter(i+T[i]);
+			visit[i] = false;
+		}
 	}
 	
+	static void calc()
+	{
+		int sum = 0;
+		for(int i=0; i<N; i++)
+		{
+			if(visit[i] == true)
+				sum += P[i];
+		}
+		
+		max = max < sum ? sum : max;
+	}
 }
