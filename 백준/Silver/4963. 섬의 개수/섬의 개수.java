@@ -5,6 +5,7 @@ public class Main {
 	final static int[] dc = { -1, 1, 0, 0, -1, -1, 1, 1 }; // 상 하 좌 우 좌상 우상 좌하 우하
 	final static int[] dr = { 0, 0, -1, 1, -1, 1, -1, 1 }; // 상 하 좌 우 좌상 우상 좌하 우하
 
+	// 변수 선언
 	static int W, H;
 	static int[][] map;
 	static boolean[][] check;
@@ -12,6 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
+		// 입력이 0 0 들어올 때 까지 반복
 		while (true) {
 			W = sc.nextInt();
 			H = sc.nextInt();
@@ -32,6 +34,7 @@ public class Main {
 
 	}
 
+	// 섬 개수 리턴하는 함수
 	static int find(int col, int row) {
 		int cnt = 0;
 		for (int i = col; i < H; i++) {
@@ -39,6 +42,7 @@ public class Main {
 				if (check[i][j] == true || map[i][j] == 0)
 					continue;
 
+				// 확인이 끝나면 섬 개수++
 				if (check[i][j] == false && map[i][j] == 1) {
 					check[i][j] = true;
 					iter(i, j);
@@ -50,6 +54,7 @@ public class Main {
 		return cnt;
 	}
 
+	// 8방 확인
 	static void iter(int i, int j) {
 		for (int k = 0; k < 8; k++) {
 			int nc = i + dc[k];
