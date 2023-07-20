@@ -11,7 +11,8 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		N = sc.nextInt();
-		
+
+		// 해시에 값 추가
 		for(int i=0; i<N; i++)
 		{
 			num = sc.nextInt();
@@ -19,6 +20,8 @@ public class Main {
 		}
 		
 		M = sc.nextInt();
+
+		// 해시에 key가 있음 -> 1 출력, 없음 -> 0 출력
 		for(int i=0; i<M; i++)
 		{
 			num = sc.nextInt();
