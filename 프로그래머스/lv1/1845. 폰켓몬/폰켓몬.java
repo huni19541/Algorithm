@@ -1,17 +1,16 @@
 import java.util.HashMap;
 
-class Solution {
+class Solution{
+    
     public int solution(int[] nums) {
-		int answer = 0;
+        HashMap<Integer, Integer> hm = new HashMap<>();
 		
-		int a = nums.length/2;
-
-		HashMap<Integer, Integer> map = new HashMap<>();
+		int cnt = nums.length / 2;
+		
 		for(int n : nums)
-			map.put(n, map.getOrDefault(n, 0) + 1);
+			hm.put(n, hm.getOrDefault(n, 0)+1);
 		
-		answer = map.size() > a ? a : map.size();
-		
-		return answer;
+		int res = hm.size() > cnt ? cnt : hm.size();
+		return res;
     }
 }
