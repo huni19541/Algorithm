@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 
 class Solution {
-  public boolean solution(String[] phone_book) {
+	public boolean solution(String[] phone_book) {
 		
 		Arrays.sort(phone_book);
 		
@@ -10,8 +10,8 @@ class Solution {
 			for(int j = i + 1; j < phone_book.length; j++) {
 				if(phone_book[j].startsWith(phone_book[i]))
 					return false;
-                else
-                    break;
+                		else
+                    			break;
 			}
 		}
 		return true;
