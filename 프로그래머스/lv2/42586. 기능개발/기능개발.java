@@ -1,7 +1,50 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.ArrayList;
 
 class Solution {
     public static int[] solution(int[] progresses, int[] speeds) {
+		int[] answer;
+		Queue<Integer> queue = new LinkedList<>();
+		
+		for(int i=0; i<progresses.length; i++) {
+			int num = progresses[i];
+			int cnt = 0;
+			
+			while(num < 100) {
+				num += speeds[i];
+				cnt++;
+			}
+			queue.add(cnt);
+		}
+		
+		ArrayList<Integer> list = new ArrayList<>();
+		while(queue.size() != 0) {
+			
+			int dayCnt = 1;
+			int peek = queue.poll();
+			if(queue.size() == 0) {
+				list.add(dayCnt);
+				break;
+			}
+			
+			while(queue.size() != 0 && queue.peek() <= peek) {
+				queue.remove();
+				dayCnt++;
+			}
+			
+			list.add(dayCnt);
+			
+		}
+		
+		answer = new int[list.size()];
+		for(int i=0; i<answer.length; i++)
+			answer[i] = list.get(i);
+		
+		return answer;
+	}
+    
+    public static int[] solution2(int[] progresses, int[] speeds) {
 		int[] answer = {};
         
         	// 값이 저장될 가변배열
