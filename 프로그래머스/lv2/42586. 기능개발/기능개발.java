@@ -89,10 +89,8 @@ class Solution {
 				break;
 		}
 		
-       		// int[] 배열 선언
+       		// ArrayList<Integer> -> int[]
 		answer = new int[al.size()];
-		
-        	// ArrayList값 옮기기
 		for(int i=0; i<al.size(); i++)
 			answer[i] = al.get(i);
 		
