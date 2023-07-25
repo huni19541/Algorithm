@@ -5,8 +5,11 @@ import java.util.ArrayList;
 class Solution {
     public static int[] solution(int[] progresses, int[] speeds) {
 		int[] answer;
+
+	    	// 넣는 순서대로 값을 추출하기 위한 Queue
 		Queue<Integer> queue = new LinkedList<>();
-		
+
+	    	// 100이 될 때 까지 남은 day를 count해서 queue에 추가
 		for(int i=0; i<progresses.length; i++) {
 			int num = progresses[i];
 			int cnt = 0;
@@ -17,17 +20,22 @@ class Solution {
 			}
 			queue.add(cnt);
 		}
-		
+
+	    	// 100이 넘는 day만 넣기 위한 가변배열
 		ArrayList<Integer> list = new ArrayList<>();
+
+	    	// 값 빼내기
 		while(queue.size() != 0) {
-			
+
+			// 원래 1개만 있었던 경우
 			int dayCnt = 1;
 			int peek = queue.poll();
 			if(queue.size() == 0) {
 				list.add(dayCnt);
 				break;
 			}
-			
+
+			// 처음 남은 day보다 더 많은 day가 남은 것 전까지 가변배열에 추가
 			while(queue.size() != 0 && queue.peek() <= peek) {
 				queue.remove();
 				dayCnt++;
@@ -36,7 +44,8 @@ class Solution {
 			list.add(dayCnt);
 			
 		}
-		
+
+	    	// ArrayList<Integer> -> int[]
 		answer = new int[list.size()];
 		for(int i=0; i<answer.length; i++)
 			answer[i] = list.get(i);
