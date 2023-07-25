@@ -3,7 +3,7 @@ import java.util.Queue;
 import java.util.ArrayList;
 
 class Solution {
-    public static int[] solution(int[] progresses, int[] speeds) {
+    	public static int[] solution(int[] progresses, int[] speeds) {
 		int[] answer;
 
 	    	// 넣는 순서대로 값을 추출하기 위한 Queue
@@ -53,7 +53,7 @@ class Solution {
 		return answer;
 	}
     
-    public static int[] solution2(int[] progresses, int[] speeds) {
+    	public static int[] solution2(int[] progresses, int[] speeds) {
 		int[] answer = {};
         
         	// 값이 저장될 가변배열
@@ -96,6 +96,6 @@ class Solution {
 		for(int i=0; i<al.size(); i++)
 			answer[i] = al.get(i);
 		
-        return answer;
-    }
+        	return answer;
+    	}
 }
