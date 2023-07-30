@@ -15,12 +15,12 @@ public class Main {
 		int T = Integer.parseInt(br.readLine());
 		
 		for(int i=0; i<T; i++) {
-			// Test case마다 sb, deque 초기화
-			sb.setLength(0);
+			// Test case 마다 deque 초기화
 			deque.clear();
-			
 			AC();
 		}
+		
+		System.out.println(sb);
 	}
 	
 	static void AC() throws IOException {
@@ -51,9 +51,9 @@ public class Main {
 			}
 			// D인 경우
 			else if(c == 'D') {
-				// deque가 비어있으면 "error"출력
+				// deque가 비어있으면 sb에 "error\n"추가
 				if(deque.size() == 0) {
-					System.out.println("error");
+					sb.append("error\n");
 					return;
 				}
 
@@ -70,13 +70,13 @@ public class Main {
 			}
 		}
 
-		// 제거한 후 deque가 비어있으면 "[]"출력
+		// 제거한 후 deque가 비어있으면 sb에 "[]\n"추가
 		if(n == 0) {
-			System.out.println("[]");
+			sb.append("[]\n");
 			return;
 		}
 
-		// 비어있지 않은 경우 [ , , , ]로 Stringbuilder 만들고 출력
+		// 비어있지 않은 경우 sb에 "[ , , , ]\n"형태로 추가 
 		sb.append('[');
 		if(!reverse) {
 			sb.append(deque.pollFirst());
@@ -90,7 +90,6 @@ public class Main {
 				sb.append(',').append(deque.pollLast());
 			}
 		}
-		sb.append(']');
-		System.out.println(sb);
+		sb.append("]\n");
 	}
 }
