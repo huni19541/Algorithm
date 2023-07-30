@@ -15,6 +15,7 @@ public class Main {
 		int T = Integer.parseInt(br.readLine());
 		
 		for(int i=0; i<T; i++) {
+			// Test case마다 sb, deque 초기화
 			sb.setLength(0);
 			deque.clear();
 			
@@ -24,12 +25,14 @@ public class Main {
 	
 	static void AC() throws IOException {
 		boolean reverse = false;
-		
+
+		// 입력
 		String p = br.readLine();
 		int pLen = p.length();
 		int n = Integer.parseInt(br.readLine());
 		String temp = br.readLine();
-		
+
+		// [ , , , ] 입력을 하나씩 나누어 deque에 추가
 		if(n != 0) {
 			String[] sArr = temp.substring(1, temp.length()-1).split(",");
 			
@@ -37,34 +40,43 @@ public class Main {
 				deque.add(Integer.valueOf(s));
 			}
 		}
-		
-			
+
+		// p 함수 실행
 		for(int i=0; i<pLen; i++) {
 			char c = p.charAt(i);
-			
+
+			// R인 경우 boolean값 true/false 바꾸기
 			if(c == 'R') {
 				reverse = (reverse == true) ? false : true;
-			} else if(c == 'D') {
+			}
+			// D인 경우
+			else if(c == 'D') {
+				// deque가 비어있으면 "error"출력
 				if(deque.size() == 0) {
 					System.out.println("error");
 					return;
 				}
-				
+
+				// 정방향이면 맨 앞 제거
 				if(!reverse) {
 					deque.pollFirst();
 					n--;
-				} else {
+				} 
+				// 반대방향이면 맨 뒤 제거
+				else {
 					deque.pollLast();
 					n--;
 				}
 			}
 		}
-		
+
+		// 제거한 후 deque가 비어있으면 "[]"출력
 		if(n == 0) {
 			System.out.println("[]");
 			return;
 		}
-	
+
+		// 비어있지 않은 경우 [ , , , ]로 Stringbuilder 만들고 출력
 		sb.append('[');
 		if(!reverse) {
 			sb.append(deque.pollFirst());
