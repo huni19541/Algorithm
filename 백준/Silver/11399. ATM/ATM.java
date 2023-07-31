@@ -1,33 +1,35 @@
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		//System.setIn(new FileInputStream("Test.txt"));
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int N = sc.nextInt();
-		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		int N = Integer.parseInt(br.readLine());
+		int[] arr = new int[N];
 		
-		int num = 0;
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
 		for(int i=0; i<N; i++) {
-			num = sc.nextInt();
-			pq.add(num);
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
+		Arrays.sort(arr);
 		
-		int[] sumArr = new int[N];
 		int totalSum = 0;
 		for(int i=0; i<N; i++) {
-			if(i==0) {
-				sumArr[i] = pq.poll();
-				totalSum += sumArr[i];
-				continue;
+			for(int j=0; j<=i; j++) {
+				totalSum += arr[j];
 			}
-			sumArr[i] = sumArr[i-1] + pq.poll();
-			totalSum += sumArr[i];
 		}
 		
 		System.out.println(totalSum);
