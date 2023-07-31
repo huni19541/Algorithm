@@ -1,5 +1,9 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -8,15 +12,18 @@ public class Main {
 	static int M = 0;
 	static ArrayList<Integer> list = new ArrayList<>();
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		N = sc.nextInt();
-		M = sc.nextInt();
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 		
 		iter(N, M);
 		System.out.println(sb);
+
 	}
 	
 	public static void iter(int N, int M) {
