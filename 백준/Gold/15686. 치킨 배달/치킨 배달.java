@@ -13,7 +13,8 @@ public class Main {
 	static int[][] map;
 	static boolean[][] check;
 	static int Min = Integer.MAX_VALUE;
-			
+
+	// 치킨집의 x, y좌표 저장할 클래스 
 	static class Pos{
 		private int x;
 		private int y;
@@ -23,7 +24,8 @@ public class Main {
 			this.y = y;
 		}
 	}
-	
+
+	// 치킨집의 좌표 저장할 ArrayList
 	static ArrayList<Pos> list = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException {
@@ -35,7 +37,8 @@ public class Main {
 		M = Integer.parseInt(st.nextToken());
 		map = new int[N][N];
 		check = new boolean[N][N];
-		
+
+		// 입력
 		for(int i=0; i<N; i++) {
 			st = new StringTokenizer(br.readLine());
 			for(int j=0; j<N; j++) {
@@ -47,6 +50,7 @@ public class Main {
 		System.out.println(Min);
 	}
 
+	// M개의 치킨집 선택하는 함수
 	static void select(int idx, int M) {
 		if(M == 0) {
 			calc();
@@ -56,16 +60,22 @@ public class Main {
 		for(int i=idx; i<N; i++) {
 			for(int j=0; j<N; j++) {
 				if(map[i][j] == 2 && check[i][j] == false) {
+					// 조건에 맞으면 list에 추가한 후, boolean : true
 					list.add(new Pos(j, i));
 					check[i][j] = true;
+					
+					// M-1로 재귀호출
 					select(i, M-1);
+					
+					//재귀가 리턴되면 list 맨 뒤 제거 후, boolean : false
 					list.remove(list.size()-1);
 					check[i][j] = false;
 				}
 			}
 		}
 	}
-	
+
+	// 선택된 M개의 치킨집으로의 가장 작은 치킨거리 계산
 	static void calc() {
 		int sum = 0;
 		
