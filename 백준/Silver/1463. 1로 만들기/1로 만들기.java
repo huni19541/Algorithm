@@ -29,31 +29,15 @@ public class Main {
 		int T = Integer.parseInt(br.readLine());
 		int[] dp = new int[T+1];
 		
-		for(int i=1; i<=T; i++) {
-			if(i == 1) {
-				dp[i] = 0;
-				continue;
-			}
-			else if(i == 2) {
-				dp[i] = 1;
-				continue;
-			}
-			else if(i == 3) {
-				dp[i] = 1;
-				continue;
-			}
+		for(int i=2; i<=T; i++) {
 			
-			if(i % 3 == 0 && i % 2 == 0) {
-				dp[i] = Math.min(dp[i-1]+1, Math.min(dp[i/2]+1, dp[i/3]+1));
+			dp[i] = dp[i-1] + 1;
+			
+			if(i % 3 == 0) {
+				dp[i] = Math.min(dp[i], dp[i/3]+1);
 			}
-			else if(i % 3 == 0) {
-				dp[i] = Math.min(dp[i-1]+1, dp[i/3]+1);
-			}
-			else if(i % 2 == 0) {
-				dp[i] = Math.min(dp[i-1]+1, dp[i/2]+1);
-			}
-			else {
-				dp[i] = dp[i-1]+1;
+			if(i % 2 == 0) {
+				dp[i] = Math.min(dp[i], dp[i/2]+1);
 			}
 		}
 		
