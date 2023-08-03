@@ -29,19 +29,19 @@ public class Main {
 
 		st = new StringTokenizer(br.readLine());
 		
-		String str1 = st.nextToken();
-		String str2 = st.nextToken();
+		int num1 = Integer.parseInt(new StringBuilder(st.nextToken()).reverse().toString());
+		int num2 = Integer.parseInt(new StringBuilder(st.nextToken()).reverse().toString());
 		
-		String temp = "";
-		String temp2 = "";
-		for(int i=str1.length()-1; i>=0; i--) {
-			temp += str1.charAt(i);
-		}
-		for(int i=str2.length()-1; i>=0; i--) {
-			temp2 += str2.charAt(i);
-		}
+//		String temp = "";
+//		String temp2 = "";
+//		for(int i=str1.length()-1; i>=0; i--) {
+//			temp += str1.charAt(i);
+//		}
+//		for(int i=str2.length()-1; i>=0; i--) {
+//			temp2 += str2.charAt(i);
+//		}
 		
-		int res = Integer.parseInt(temp) > Integer.parseInt(temp2) ? Integer.parseInt(temp) : Integer.parseInt(temp2);
+		int res = num1 > num2 ? num1 : num2;
 		sb.append(res);
 		
 		System.out.println(sb);
