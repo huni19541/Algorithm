@@ -31,15 +31,15 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 		int[] trees = new int[N];
-		
+
+		int start = 0;
+		int end = 0;
 		st = new StringTokenizer(br.readLine());
 		for(int i=0; i<N; i++) {
-			trees[i] = Integer.parseInt(st.nextToken());
+			int num = Integer.parseInt(st.nextToken());
+			trees[i] = num;
+			end = Math.max(end, num);
 		}
-		Arrays.sort(trees);
-		
-		int start = 0;
-		int end = trees[trees.length-1];
 		
 		int answer = 0;
 		while(start <= end) {
