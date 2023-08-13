@@ -44,9 +44,9 @@ public class Main {
 		
 		int N = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
-		
+
+		// DFS로 풀이
 		boolean[] visit = new boolean[100001];
-		
 		Queue<Info> queue = new LinkedList<>();
 		
 		queue.offer(new Info(N, 0, 0));
@@ -64,7 +64,8 @@ public class Main {
 				sb.append(curDepth-curTelpoCnt);
 				break;
 			}
-			
+
+			1 -> 2 의 경우 때문에 *2를 먼저 queue에 offer
 			if(curPos <= 50000) {
 				if(!visit[curPos*2]) {
 					visit[curPos*2] = true;
