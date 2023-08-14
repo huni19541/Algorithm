@@ -35,6 +35,8 @@ public class Main {
 		
 		int N = Integer.parseInt(br.readLine());
 		st = new StringTokenizer(br.readLine());
+
+		// NlogN
 		for(int i=0; i<N; i++) {
 			pq.add(new int[] {Integer.parseInt(st.nextToken()), i});
 		}
@@ -43,6 +45,8 @@ public class Main {
 		int[] before = {Integer.MIN_VALUE, 0};
 		
 		int[] res = new int[N];
+
+		// NlogN
 		for(int i=0; i<N; i++) {
 			int[] temp = pq.poll();
 			if(before[0] < temp[0])
