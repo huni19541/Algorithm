@@ -1,48 +1,93 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
+import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class Main {
 
+public class Main {
+	
+	static class MyStack{
+		static LinkedList<Integer> nums = new LinkedList<>();
+		static int size = 0;
+		
+		static void push(int n) {
+			nums.add(0, n);
+			size++;
+		}
+		
+		static int pop() {
+			if(size == 0) {
+				return -1;
+			}
+			else {
+				size--;
+				return nums.pollFirst();
+			}
+		}
+		
+		static int size() {
+			return size;
+		}
+		
+		static int empty() {
+			if(size == 0)
+				return 1;
+			else
+				return 0;
+		}
+		
+		static int top() {
+			if(size == 0)
+				return -1;
+			else
+				return nums.get(0);
+		}
+	}
+	
+	
 	public static void main(String[] args) throws IOException {
+		
+		//System.setIn(new FileInputStream("Test.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
-		
+		StringTokenizer st;
 		
 		int N = Integer.parseInt(br.readLine());
-		String comment;
-		
-		Stack<Integer> stack = new Stack<>();
 		for(int i=0; i<N; i++) {
-			comment = br.readLine();
-			
-			if(comment.startsWith("push")) {
-				String[] temp;
-				temp = comment.split(" ");
-				stack.add(Integer.parseInt(temp[1]));
+			String str = br.readLine();
+			if(str.startsWith("push")) {
+				String[] strs = str.split(" ");
+				MyStack.push(Integer.parseInt(strs[1]));
+				continue;
 			}
-			else if(comment.equals("top")) {
-				if(stack.isEmpty()) sb.append("-1\n");
-				else sb.append(stack.peek()).append('\n');
+			if(str.equals("pop")) {
+				sb.append(MyStack.pop());
 			}
-			else if(comment.equals("size")) {
-				sb.append(stack.size()).append('\n');
+			else if(str.equals("top")) {
+				sb.append(MyStack.top());
 			}
-			else if(comment.equals("empty")) {
-				if(stack.isEmpty()) sb.append("1\n");
-				else sb.append("0\n");
+			else if(str.equals("size")) {
+				sb.append(MyStack.size());
 			}
-			else if(comment.equals("pop")) {
-				if(stack.isEmpty()) sb.append("-1\n");
-				else sb.append(stack.pop()).append('\n');
+			else if(str.equals("empty")) {
+				sb.append(MyStack.empty());
 			}
+			sb.append('\n');
 		}
 		
 		System.out.println(sb);
