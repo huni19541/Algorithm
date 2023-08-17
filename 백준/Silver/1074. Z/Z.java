@@ -16,41 +16,7 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int R = Integer.parseInt(st.nextToken());
 		int C = Integer.parseInt(st.nextToken());
-//
-//		int sum = 0;
-//		if(N == 1) {
-//			if(C % 2 == 1)
-//				sum += 1;
-//			if(R % 2 == 1)
-//				sum += 2;
-//			sb.append(sum);
-//		}
-//		else {
-////			sum += ((R / 2)*(int)(Math.pow(2, N-1))*4) + ((C/2)*4);
-////			int res1 = ((R / (int)(Math.pow(2, (2*(N-1)-2)))) * 4 * 2);
-//			int res1 = ((R / (int)(Math.pow(2, N-1))) * 4 * 2 * (int)(Math.pow(2, (2*(N-1)-2))));
-////			int res2 = (C / (int)(Math.pow(2, (2*(N-1)-2))) * 4);
-//			int res2 = (C / (int)(Math.pow(2, N-1)) * 4 * (int)(Math.pow(2, (2*(N-1)-2))));
-//			sum += (res1 + res2);
-//			
-//			if(C >= (int)(Math.pow(2, N-1))) {
-//				C -= (int)(Math.pow(2, N-1));
-//			}
-//			
-//			if(R >= (int)(Math.pow(2, N-1))) {
-//				R -= (int)(Math.pow(2, N-1));
-//			}
-//		
-//			
-//			
-//			
-//			if(C % 2 == 1)
-//				sum += 1;
-//			if(R % 2 == 1)
-//				sum += 2;
-//			
-//			sb.append(sum);
-//		}
+        
 		find(N, R, C);
 
 		sb.append(res);
