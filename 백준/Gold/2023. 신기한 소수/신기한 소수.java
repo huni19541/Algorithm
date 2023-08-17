@@ -1,58 +1,42 @@
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Queue;
-import java.util.Set;
-import java.util.Stack;
-import java.util.StringTokenizer;
-
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	
-	static StringBuilder sb = new StringBuilder();
-	
-	public static void main(String[] args) throws IOException {
+
+	static int N;
+	static StringBuilder sb;
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		
-		//System.setIn(new FileInputStream("Test.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		sb = new StringBuilder();
 		
-		//StringTokenizer st;
-		
-		int N = Integer.parseInt(br.readLine());
-		
-		find(0, N);
+		N = Integer.parseInt(br.readLine());
+		findPrime(0, 0);
 		
 		System.out.println(sb);
 	}
 	
-	public static void find(int num, int n) {
-		if(n == 0) {
-			if(isPrime(num)) sb.append(num).append('\n');
+	private static void findPrime(int n, int num) {
+		if(n == N) {
+			sb.append(num).append('\n');
 			return;
 		}
 		
-		for(int i=0; i<10; i++) {
-			int next = num*10+i;
-			if(isPrime(next)) find(next, n-1);
+		for(int i=0; i<=9; i++) {
+			int cur = num*10 + i;
+			
+			if(isPrime(cur))
+				findPrime(n+1, cur);
 		}
+		
 	}
 	
-	public static boolean isPrime(int num) {
-		if(num < 2) return false;
+	private static boolean isPrime(int n) {
+		if(n == 0 || n == 1) return false; 
 		
-		for(int i=2; i*i <= num; i++) {
-			if(num % i == 0) return false;
+		for(int i=2; i*i<=n; i++) {
+			if(n%i == 0)
+				return false;
 		}
 		return true;
 	}
