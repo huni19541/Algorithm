@@ -55,14 +55,6 @@ public class Main {
 			
 			if(pipe(nc, nr))
 				return true;
-			else
-			{
-				if(i == 3) {
-					visit[nc][nr] = false;
-					return false;
-				}
-				else continue;
-			}
 		
 		}
 		
