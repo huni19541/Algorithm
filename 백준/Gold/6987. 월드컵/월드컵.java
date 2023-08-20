@@ -60,35 +60,14 @@ public class Main {
 
 		int teamA = match[idx][0];
 		int teamB = match[idx][1];
-
-		// A 승리 & B 패배
-		if (record[teamA][0] > 0 && record[teamB][2] > 0) {
-			record[teamA][0]--;
-			record[teamB][2]--;
-			if (find(idx + 1, cnt + 1))
-				return true;
-			record[teamA][0]++;
-			record[teamB][2]++;
-		}
-
-		// A 무승부 & B 무승부
-		if (record[teamA][1] > 0 && record[teamB][1] > 0) {
-			record[teamA][1]--;
-			record[teamB][1]--;
-			if (find(idx + 1, cnt + 1))
-				return true;
-			record[teamA][1]++;
-			record[teamB][1]++;
-		}
-
-		// A 패배 & B 승리
-		if (record[teamA][2] > 0 && record[teamB][0] > 0) {
-			record[teamA][2]--;
-			record[teamB][0]--;
-			if (find(idx + 1, cnt + 1))
-				return true;
-			record[teamA][2]++;
-			record[teamB][0]++;
+		
+		for(int i=0; i<3; i++) {
+			if (record[teamA][i] > 0 && record[teamB][2-i] > 0) {
+				record[teamA][i]--;	record[teamB][2-i]--;
+				if (find(idx+1, cnt+1))
+					return true;
+				record[teamA][i]++;	record[teamB][2-i]++;
+			}
 		}
 
 		return false;
