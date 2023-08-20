@@ -45,7 +45,7 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
 
-		// DFS로 풀이
+		// BFS로 풀이
 		boolean[] visit = new boolean[100001];
 		Queue<Info> queue = new LinkedList<>();
 		
