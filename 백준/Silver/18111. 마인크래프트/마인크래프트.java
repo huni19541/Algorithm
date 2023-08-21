@@ -30,14 +30,13 @@ public class Main {
 		int minHeight = 0;
 		outer:
 		while(h <= map[map.length-1]) {
-			int[] temp = Arrays.copyOf(map, map.length);
 			int b = B;
 			int time = 0;
 			boolean check = true;
 			for(int i=N-1; i>=0; i--) {
 				for(int j=M-1; j>=0; j--) {
 					
-					int cur = temp[i*M+j];
+					int cur = map[i*M+j];
 					if(cur > h) {
 						int gap = cur - h;
 						time += (2 * gap);
