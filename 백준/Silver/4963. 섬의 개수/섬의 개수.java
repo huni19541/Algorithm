@@ -1,71 +1,66 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
-	final static int[] dc = { -1, 1, 0, 0, -1, -1, 1, 1 }; // 상 하 좌 우 좌상 우상 좌하 우하
-	final static int[] dr = { 0, 0, -1, 1, -1, 1, -1, 1 }; // 상 하 좌 우 좌상 우상 좌하 우하
-
-	// 변수 선언
 	static int W, H;
 	static int[][] map;
-	static boolean[][] check;
+	static boolean[][] visit;
+	static int cnt;
+	static int[] dr = { 0, 0, -1, 1, -1, 1, -1, 1 }; // 상 하 좌 우 좌상 우상 좌하 우하
+	static int[] dc = { -1, 1, 0, 0, -1, -1, 1, 1};
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) throws IOException {
 
-		// 입력이 0 0 들어올 때 까지 반복
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		StringTokenizer st;
+
 		while (true) {
-			W = sc.nextInt();
-			H = sc.nextInt();
+			st = new StringTokenizer(br.readLine());
+			W = Integer.parseInt(st.nextToken());
+			H = Integer.parseInt(st.nextToken());
 
 			if (W == 0 && H == 0)
 				break;
 
+			cnt = 0;
 			map = new int[H][W];
-			check = new boolean[H][W];
-
-			for (int i = 0; i < H; i++)
-				for (int j = 0; j < W; j++)
-					map[i][j] = sc.nextInt();
-
-			int res = find(0, 0);
-			System.out.println(res);
-		}
-
-	}
-
-	// 섬 개수 리턴하는 함수
-	static int find(int col, int row) {
-		int cnt = 0;
-		for (int i = col; i < H; i++) {
-			for (int j = row; j < W; j++) {
-				if (check[i][j] == true || map[i][j] == 0)
-					continue;
-
-				// 확인이 끝나면 섬 개수++
-				if (check[i][j] == false && map[i][j] == 1) {
-					check[i][j] = true;
-					iter(i, j);
-					cnt++;
+			visit = new boolean[H][W];
+			
+			for(int i=0; i<H; i++) {
+				st = new StringTokenizer(br.readLine());
+				for(int j=0; j<W; j++) {
+					map[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
+			
+			for(int i=0; i<H; i++) {
+				for(int j=0; j<W; j++) {
+					if(!visit[i][j] && map[i][j] == 1) {
+						visit[i][j] = true;
+						dfs(i, j);
+						cnt++;
+					}
+				}
+			}
+			
+			sb.append(cnt).append('\n');
 		}
-
-		return cnt;
+		System.out.println(sb);
 	}
 
-	// 8방 확인
-	static void iter(int i, int j) {
+	private static void dfs(int i, int j) {
+		
 		for (int k = 0; k < 8; k++) {
 			int nc = i + dc[k];
 			int nr = j + dr[k];
 
-			if (nc >= 0 && nc < H && nr >= 0 && nr < W) {
-				if (check[nc][nr] == false && map[nc][nr] == 1) {
-					check[nc][nr] = true;
-					iter(nc, nr);
-				}
-			}
+			if (nc < 0 || nc >= H || nr < 0 || nr >= W || visit[nc][nr] || map[nc][nr] == 0)
+				continue;
+
+			visit[nc][nr] = true;
+			dfs(nc, nr);
 		}
 	}
 
