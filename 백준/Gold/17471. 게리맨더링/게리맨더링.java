@@ -45,7 +45,7 @@ public class Main {
 			}
 		}
 		
-		for(int i=1; i<N; i++) {
+		for(int i=1; i<=N/2; i++) {
 			int[] flag = new int[N+1];
 			
 			for(int j=0; j<i; j++) {
@@ -82,32 +82,6 @@ public class Main {
 			sb.append(-1);
 		System.out.println(sb);
 	}
-	
-//	static void iter(int start, int cnt) {
-//		if(cnt == 0) {
-//			if(!remainCheck()) return;
-//			
-//			int sum1 = 0, sum2 = 0;
-//			for(int i=1; i<=N; i++) {
-//				if(visited[i])
-//					sum1 += arr[i][1];
-//				else
-//					sum2 += arr[i][1];
-//			}
-//			min = Math.min(min, Math.abs(sum1-sum2));
-//			
-//			return;
-//		}
-//		
-//		for(Node temp = adjList[start]; temp != null; temp = temp.next) {
-//			if(!visited[temp.vertex]) {
-//				
-//				visited[temp.vertex] = true;
-//				iter(temp.vertex, cnt-1);
-//				visited[temp.vertex] = false;
-//			}
-//		}
-//	}
 	
 	static boolean check() {
 		boolean[] trueCheck = Arrays.copyOf(visited, visited.length);
