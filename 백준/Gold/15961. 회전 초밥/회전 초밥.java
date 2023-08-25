@@ -16,9 +16,10 @@ public class Main {
 		int c = Integer.parseInt(st.nextToken());
 		
 		Queue<Integer> queue = new ArrayDeque<>();
-		HashMap<Integer, Integer> hashmap = new HashMap<>();
+//		HashMap<Integer, Integer> hashmap = new HashMap<>();
+		int[] count = new int[d+1];
+		
 		int[] arr = new int[k-1];
-		int arrIdx = 0;
 		
 		int max = Integer.MIN_VALUE;
 		int cnt = 0;
@@ -26,13 +27,16 @@ public class Main {
 			int num = Integer.parseInt(br.readLine());
 			queue.offer(num);
 			arr[i] = num;
-			if(!hashmap.containsKey(num)) {
+//			if(!hashmap.containsKey(num)) {
+//				cnt++;
+//				hashmap.put(num, 1);
+//			}
+//			else {
+//				hashmap.put(num, hashmap.get(num)+1);
+//			}
+			if(count[num] == 0)
 				cnt++;
-				hashmap.put(num, 1);
-			}
-			else {
-				hashmap.put(num, hashmap.get(num)+1);
-			}
+			count[num]++;
 			
 		}
 		
@@ -40,52 +44,80 @@ public class Main {
 			int num = Integer.parseInt(br.readLine());
 			queue.offer(num);
 			
-			if(!hashmap.containsKey(num)) {
-				cnt++;
-				hashmap.put(num, 1);
-			}
-			else {
-				hashmap.put(num, hashmap.get(num)+1);
-			}
+//			if(!hashmap.containsKey(num)) {
+//				cnt++;
+//				hashmap.put(num, 1);
+//			}
+//			else {
+//				hashmap.put(num, hashmap.get(num)+1);
+//			}
+//			
+//			if(!hashmap.containsKey(c))
+//				max = Math.max(max, cnt+1);
+//			else
+//				max = Math.max(max, cnt);
+//			
+//			int peek = queue.poll();
+//			hashmap.put(peek, hashmap.get(peek)-1);
+//			
+//			if(hashmap.get(peek) == 0) {
+//				hashmap.remove(peek);
+//				cnt--;
+//			}
 			
-			if(!hashmap.containsKey(c))
+			if(count[num] == 0)
+				cnt++;
+			count[num]++;
+			
+			if(count[c] == 0)
 				max = Math.max(max, cnt+1);
 			else
 				max = Math.max(max, cnt);
 			
 			int peek = queue.poll();
-			hashmap.put(peek, hashmap.get(peek)-1);
 			
-			if(hashmap.get(peek) == 0) {
-				hashmap.remove(peek);
+			if(--count[peek] == 0)
 				cnt--;
-			}
 		}
 		
 		for(int i=0; i<k-1; i++) {
 			int num = arr[i];
 			queue.offer(num);
 			
-			if(!hashmap.containsKey(num)) {
-				cnt++;
-				hashmap.put(num, 1);
-			}
-			else {
-				hashmap.put(num, hashmap.get(num)+1);
-			}
+//			if(!hashmap.containsKey(num)) {
+//				cnt++;
+//				hashmap.put(num, 1);
+//			}
+//			else {
+//				hashmap.put(num, hashmap.get(num)+1);
+//			}
+//			
+//			if(!hashmap.containsKey(c))
+//				max = Math.max(max, cnt+1);
+//			else
+//				max = Math.max(max, cnt);
+//			
+//			int peek = queue.poll();
+//			hashmap.put(peek, hashmap.get(peek)-1);
+//			
+//			if(hashmap.get(peek) == 0) {
+//				hashmap.remove(peek);
+//				cnt--;
+//			}
 			
-			if(!hashmap.containsKey(c))
+			if(count[num] == 0)
+				cnt++;
+			count[num]++;
+			
+			if(count[c] == 0)
 				max = Math.max(max, cnt+1);
 			else
 				max = Math.max(max, cnt);
 			
 			int peek = queue.poll();
-			hashmap.put(peek, hashmap.get(peek)-1);
 			
-			if(hashmap.get(peek) == 0) {
-				hashmap.remove(peek);
+			if(--count[peek] == 0)
 				cnt--;
-			}
 		}
 		
 		sb.append(max);
