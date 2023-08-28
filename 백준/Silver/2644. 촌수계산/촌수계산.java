@@ -90,7 +90,8 @@ public class Main {
 				resB += (1 << i);
 			}
 		}
-		
+
+		// 높이를 맞췄는데 두 노드가 같은 경우 -> 공통 조상 바로 찾음
 		if(a == b) {
 			return resB;
 		}
