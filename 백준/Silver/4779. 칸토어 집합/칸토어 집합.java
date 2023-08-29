@@ -1,45 +1,47 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
+    static int n , arr[];
+    
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str; //입력 없을때 까지 받기
+        while((str = br.readLine()) != null) {
+            n = Integer.parseInt(str);
 
-	public static void main(String[] args) throws IOException {
+            //0이 _
+            int temp = (int) Math.pow(3,n);
+            arr = new int[temp];
+            divide(temp,0,temp-1);
+            
+            StringBuilder sb = new StringBuilder();
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
-		StringTokenizer st;
-		
-		String str;
-		while((str = br.readLine()) != null) {
-			int N = Integer.parseInt(str);
-			
-			N = (int)Math.pow(3, N);
-			boolean[] check = new boolean[N];
-			
-			dq(N, 0, check);
-			for(int i=0; i<N; i++) {
-				if(!check[i]) {
-					sb.append('-');
-				}
-				else {
-					sb.append(" ");
-				}
-			}
-			sb.append('\n');
-		}
-		System.out.println(sb);
-	}
-	
-	private static void dq(int size, int start, boolean[] check) {
-		if(size == 1) return;
-		
-		int temp = size/3;
-		for(int i=start+temp; i<start+2*temp; i++) {
-			check[i] = true;
-		}
-		
-		dq(temp, start, check);
-		dq(temp, start+2*temp, check);
-	}
+            for(int i=0;i<arr.length;i++) {
+                if(arr[i]==0) sb.append("-");
+                else sb.append(" ");
+            }
+            System.out.println(sb.toString());
+        }
+        
 
+    }
+    private static void divide(int range,int start,int end) {
+        
+        
+        if(range==1 ) {
+            return;
+        }
+        
+        else {
+            int temp = range/3;
+            for(int i=start+temp;i<temp*2+start;i++) {
+                arr[i] = 1;
+            }
+
+            divide(temp,start,start+temp-1);
+            divide(temp,end-temp+1,end);
+        }
+    }
 }
