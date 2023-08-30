@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class Test {
 	
 	public static void main(String[] args) throws IOException {
 		
@@ -9,31 +9,42 @@ public class Main {
 		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
 		
-		char[] arr = br.readLine().toCharArray();
-		char[] arr2 = br.readLine().toCharArray();
+		String s = br.readLine();
+		String p = br.readLine();
 		
-		int col = arr.length;
-		int row = arr2.length;
+		int sLen = s.length();
+		int pLen = p.length();
 		
-		int[][] map = new int[row+1][col+1];
-		for(int i=0; i<col; i++) {
-			map[0][i] = 0;
-		}
-		for(int i=0; i<row; i++) {
-			map[i][0] = 0;
+		char[] sArr = new char[sLen+1];
+		for(int i=1; i<=sLen; i++) {
+			sArr[i] = s.charAt(i-1);
 		}
 		
-		for(int i=1; i<=row; i++) {
-			for(int j=1; j<=col; j++) {
-				if(arr[j-1] == arr2[i-1]) {
-					map[i][j] = map[i-1][j-1] + 1;
+		char[] pArr = new char[pLen+1];
+		for(int i=1; i<=pLen; i++) {
+			pArr[i] = p.charAt(i-1);
+		}
+		
+		
+		int[][] dp = new int[pLen+1][sLen+1];
+		for(int i=0; i<sLen; i++) {
+			dp[0][i] = 0;
+		}
+		for(int i=0; i<pLen; i++) {
+			dp[i][0] = 0;
+		}
+		
+		for(int i=1; i<=pLen; i++) {
+			for(int j=1; j<=sLen; j++) {
+				if(sArr[j] == pArr[i]) {
+					dp[i][j] = dp[i-1][j-1] + 1;
 				}
 				else {
-					map[i][j] = Math.max(map[i-1][j], map[i][j-1]);
+					dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
 				}
 			}
 		}
-		sb.append(map[row][col]);
+		sb.append(dp[pLen][sLen]);
 		
 		System.out.println(sb);
 	
