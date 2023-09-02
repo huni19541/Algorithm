@@ -1,22 +1,5 @@
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Queue;
-import java.util.Set;
-import java.util.Stack;
-import java.util.StringTokenizer;
-
+import java.io.*;
+import java.util.*;
 
 public class Main {
 	
@@ -35,7 +18,7 @@ public class Main {
 		
 		int[] w = new int[N+1];
 		int[] v = new int[N+1];
-		int[][] dp = new int[N+1][K+1];
+		int[] dp = new int[K+1];
 		
 		for(int i=1; i<=N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -45,20 +28,16 @@ public class Main {
 		}
 		
 		for(int i=1; i<=N; i++) {
-			for(int j=1; j<=K; j++) {
-					if(j - w[i] >= 0) {
-					dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-w[i]] + v[i]);
-					}
-					
-					else {
-						dp[i][j] = dp[i-1][j];
+			for(int j=K; j>=0; j--) {
+					if(w[i] <= j) {
+					    dp[j] = Math.max(dp[j], dp[j-w[i]] + v[i]);
 					}
 			}
 		}
 		
 		
 		
-		sb.append(dp[N][K]);
+		sb.append(dp[K]);
 		
 		System.out.println(sb);
 	}
