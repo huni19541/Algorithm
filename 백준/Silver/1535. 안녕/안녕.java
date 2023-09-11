@@ -25,19 +25,15 @@ public class Main {
 
 		int[] dp = new int[101];
 
-		int max = 0;
 		for (int i = 0; i < N; i++) {
-			for (int j = 99; j >= 1; j--) {
+			for (int j = 99; j >= 0; j--) {
 				if (j >= L[i]) {
 					dp[j] = Math.max(dp[j], dp[j - L[i]] + J[i]);
-					max = Math.max(max, dp[j]);
-				} else {
-					dp[j] = Math.max(dp[j], dp[j - 1]);
 				}
 			}
 		}
 
-		sb.append(max);
+		sb.append(dp[99]);
 
 		System.out.println(sb);
 
