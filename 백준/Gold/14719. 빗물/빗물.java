@@ -2,18 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-	
-	static class info {
-		int height;
-		int idx;
 		
-		public info(int height, int idx) {
-			this.height = height;
-			this.idx = idx;
-		}
-	}
-	
-	
 	public static void main(String[] args) throws IOException {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
