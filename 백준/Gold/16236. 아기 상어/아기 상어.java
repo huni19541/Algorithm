@@ -50,10 +50,13 @@ public class Main {
 		
 		while(true) {
 			pq = new PriorityQueue<>((o1, o2) -> {
-				return o1.dist==o2.dist ? (o1.row==o2.row ? o1.col-o2.col : o1.row-o2.row) : o1.dist-o2.dist;
+				return o1.dist==o2.dist ? 
+						(o1.row==o2.row ? Integer.compare(o1.col, o2.col) : Integer.compare(o1.row, o2.row))
+						: Integer.compare(o1.dist, o2.dist);
 			});
 			queue = new ArrayDeque<>();
 			visited = new boolean[N][N];	
+			queue.offer(new Info(sharkPos[0], sharkPos[1], 0));
 			find();
 			
 			if(pq.isEmpty()) break;
@@ -76,20 +79,6 @@ public class Main {
 	}
 	
 	private static void find() {
-		
-		if(queue.isEmpty()) {
-			visited[sharkPos[0]][sharkPos[1]] = true;
-			
-			for(int i=0; i<4; i++) {
-				int nr = sharkPos[0] + dr[i];
-				int nc = sharkPos[1] + dc[i];
-				
-				if(nr < 0 || nr >= N || nc < 0 || nc >= N || map[nr][nc] > curSize || visited[nr][nc]) continue;
-
-				visited[nr][nc] = true;
-				queue.offer(new Info(nr, nc, 1));
-			}
-		}
 		
 		int minDist = Integer.MAX_VALUE;
 		while(!queue.isEmpty()) {
