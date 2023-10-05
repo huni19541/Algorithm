@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class test {
 	
 	static int[] dr = {-1, 1, 0, 0}; // 상 하 좌 우
 	static int[] dc = {0, 0, -1, 1};
@@ -29,6 +29,7 @@ public class Main {
 			}
 		}
 		
+		// 64C3 조합 -> next permutation 활용
 		int[] flag = new int[N*M];
 		for(int i=0; i<3; i++) {
 			flag[N*M-1-i] = 1;
@@ -36,6 +37,8 @@ public class Main {
 		
 		do {
 			boolean check = true;
+			
+			// 뽑은 3개가 전부 0이 아니라면 다시 조합뽑기
 			for(int i=0; i<N*M; i++) {
 				if(flag[i] == 1) {
 					if(map[i/M][i%M] == 1 || map[i/M][i%M] == 2) {
@@ -44,7 +47,10 @@ public class Main {
 					}
 				}
 			}
+			
+			// 뽑은 3개가 전부 0인 경우
 			if(check) {
+				// 벽 세우기
 				for(int i=0; i<N*M; i++) {
 					if(flag[i] == 1) {
 						map[i/M][i%M] = 1;
@@ -54,6 +60,7 @@ public class Main {
 				visited = new boolean[N][M];
 				maxArea = Math.max(maxArea, find());
 				
+				// 원상복구
 				for(int i=0; i<N*M; i++) {
 					if(flag[i] == 1) {
 						map[i/M][i%M] = 0;
@@ -69,7 +76,9 @@ public class Main {
 		
 	}
 	
+	// maxArea 찾는 메소드
 	private static int find() {
+		// dfs탐색을 하면서 map의 저장내용을 변경해야 하므로 map을 복사한 temp 사용
 		int[][] temp = new int[N][M];
 		for(int i=0; i<N; i++) {
 			for(int j=0; j<M; j++) {
@@ -77,6 +86,7 @@ public class Main {
 			}
 		}
 		
+		// 바이러스 확산 재귀 탐색
 		for(int i=0; i<N; i++) {
 			for(int j=0; j<M; j++) {
 				if(map[i][j] == 2 && !visited[i][j]) {
@@ -85,6 +95,7 @@ public class Main {
 			}
 		}
 		
+		// 남아있는 안전영역 찾아서 리턴
 		int sum = 0;
 		for(int i=0; i<N; i++) {
 			for(int j=0; j<M; j++) {
@@ -97,6 +108,7 @@ public class Main {
 		return sum;
 	}
 	
+	// 일반적인 4방향 탐색 재귀 메소드
 	private static void dfs(int curr, int curc, int[][] map) {
 		map[curr][curc] = 2;
 		
