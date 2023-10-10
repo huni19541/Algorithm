@@ -51,33 +51,48 @@ public class Main {
 				}
 			}
 			
-			//위쪽 바람
-			for(int i=airCleaner-2; i>=1; i--) {
-				temp[i][0] = temp[i-1][0];
-			}
-			for(int i=0; i<C-1; i++) {
-				temp[0][i] = temp[0][i+1];
-			}
-			for(int i=0; i<=airCleaner-2; i++) {
-				temp[i][C-1] = temp[i+1][C-1];
-			}
-			for(int i=C-1; i>1; i--) {
-				temp[airCleaner-1][i] = temp[airCleaner-1][i-1];
+			// 위쪽 바람
+			int curr = airCleaner-2;
+			int curc = 0;
+			int dir = 0;
+			while(true) {
+				int nr = curr + dr[dir];
+				int nc = curc + dc[dir];
+				
+				if(nr < 0 || nr >= airCleaner || nc < 0 || nc >= C) {
+					dir++;
+					continue;
+				}
+				
+				if(map[nr][nc] == -1) break;
+				
+				temp[curr][curc] = temp[nr][nc];
+				curr = nr;
+				curc = nc;
 			}
 			temp[airCleaner-1][1] = 0;
 			
-			//아래쪽 바람
-			for(int i=airCleaner+1; i<R-1; i++) {
-				temp[i][0] = temp[i+1][0];
-			}
-			for(int i=0; i<C-1; i++) {
-				temp[R-1][i] = temp[R-1][i+1];
-			}
-			for(int i=R-1; i>=airCleaner+1; i--) {
-				temp[i][C-1] = temp[i-1][C-1];
-			}
-			for(int i=C-1; i>1; i--) {
-				temp[airCleaner][i] = temp[airCleaner][i-1];
+			// 아래쪽 바람
+			curr = airCleaner+1;
+			curc = 0;
+			dir = 2;
+			while(true) {
+				int nr = curr + dr[dir];
+				int nc = curc + dc[dir];
+				
+				if(nr < airCleaner || nr >= R || nc < 0 || nc >= C) {
+					dir--;
+					if(dir < 0) {
+						dir += 4;
+					}
+					continue;
+				}
+				
+				if(map[nr][nc] == -1) break;
+				
+				temp[curr][curc] = temp[nr][nc];
+				curr = nr;
+				curc = nc;
 			}
 			temp[airCleaner][1] = 0;
 			
