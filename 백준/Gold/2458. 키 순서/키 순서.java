@@ -4,7 +4,7 @@ import java.util.*;
 public class Main {
 	
 	static int N, M;
-	static ArrayList<Integer> adjList[];
+	static int[][] adjMatrix;
 	static int[] arrShort, arrTall;
 
 	public static void main(String[] args) throws IOException {
@@ -16,17 +16,14 @@ public class Main {
 		st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
-		adjList = new ArrayList[N+1];
-		for(int i=1; i<=N; i++) {
-			adjList[i] = new ArrayList<Integer>();
-		}
+		adjMatrix = new int[501][501];
 		
 		for(int i=0; i<M; i++) {
 			st = new StringTokenizer(br.readLine());
 			int c = Integer.parseInt(st.nextToken());
 			int p = Integer.parseInt(st.nextToken());
 			
-			adjList[c].add(p);
+			adjMatrix[c][p] = 1;
 		}
 		
 		arrShort = new int[N+1];
@@ -47,20 +44,22 @@ public class Main {
 	
 	private static void find() {
 		for(int i=1; i<=N; i++) {
-			Queue<Integer> queue = new ArrayDeque<>();
 			boolean[] visited = new boolean[N+1];
+			
+			Queue<Integer> queue = new ArrayDeque<>();
 			queue.offer(i);
+			
 			while(!queue.isEmpty()) {
 				int cur = queue.poll();
 				
 				if(visited[cur]) continue;
 				visited[cur] = true;
+				
 				arrShort[cur]++;
 				arrTall[i]++;
-				
-				for(int next : adjList[cur]) {
-					if(!visited[next]) {
-						queue.offer(next);
+				for(int j=1; j<=N; j++) {
+					if(adjMatrix[cur][j] == 1 && !visited[j]) {
+						queue.offer(j);
 					}
 				}
 			}
